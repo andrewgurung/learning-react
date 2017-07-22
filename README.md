@@ -48,6 +48,55 @@ Notes
 
 # Building Your First React App
 
+### Dealing with JSX
+- JSX is a language that allows us to mix Javascript with HTML-like tags
+- But a browser only understands plain HTML, CSS and Javascript
+
+### Solutions to convert JSX into plain old Javascript
+1. Use build tools in Node that converts JSX on every build. Preferred solution
+2. Let browser rely on Javascript library to automatically convert JSX. Quick dirty way which takes a performance hit each time browser spends time translating JSX to JS
+
+### Getting Your React On
+[Codepen.io Practice link](https://codepen.io/andrewgurung/pen/wqwQVr)
+
+#### Using Solution #2 -- letting browser handle JSX conversion
+- Start with blank HTML page
+- Add core React libraries (React + ReactDOM) -- add after `title` tag
+```
+<script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+```
+- Add Babel JS compiler -- convert JSX into JS
+```
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.
+js"></script>
+```
+
+#### Empty skeleton
+```
+<html>
+<head>
+  <title>React! React! React!</title>
+  <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+  <script>
+  </script>
+</body>
+</html>
+```
+
+### Display Name
+- ReactDOM.render(displayBody, element)
+- displayBody: HTML body that you want to render
+- element: Where to render?
+- Babel compilation: Add `type="text/babel"` attribute to script tag for Babel to do its magic
+- Run your first React App
+
+
+
 ------------------------------------
 
 # Components in React
