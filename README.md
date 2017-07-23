@@ -205,6 +205,55 @@ ReactDOM.render(
 ------------------------------------
 
 # Styling in React
+[Codepen.io Link](https://codepen.io/andrewgurung/pen/NvKZLv)
+- React favors components to be little black boxes where everything related to how the UI looks and works are stored
+
+### Displaying some vowels
+Component:
+```
+var Letter = React.createClass({
+  render: function() {
+    return (
+      <div>
+        {this.props.children}
+      </div>
+    );
+  }
+});
+```
+
+Calling component:
+```
+<Letter>A</Letter>
+```
+
+### Styling component using CSS
+- Define CSS style with `.letter` class
+- Add `className` attribute to `div` with value of `letter`
+- WARNING: Attribute must be `className` not `class`. JSX is different
+
+Update component:
+```
+...
+<div className="letter">
+ {this.props.children}
+</div>
+```
+
+CSS:
+```
+.letter {
+  padding: 10px;
+  margin: 10px;
+  ...
+}
+```
+
+### Styling Content the React way
+1. Create a Style Object
+2. Assign the style object to JSX component
+
+#### Creating a Style Object
 
 ------------------------------------
 
