@@ -300,7 +300,137 @@ Component (Parent aka consumer):
 ------------------------------------
 
 # Creating Complex Components
+- Combine components to compose more complex components
+- All components do is return a chunk of HTML to whatever called it
 
+## Steps
+1. Identify the major visual elements into tree-like structure for better feel
+2. Identify which visual elements will turn into a component and which ones will not. A component should do just one thing
+3. Create components
+
+### Creating component
+[Codepen.io Link](https://codepen.io/andrewgurung/pen/BdBXqP)
+- Create three components -- `Card`, `Label` and `Square`
+
+#### Card component
+- Container for both `Square` and `Label` components
+- Create `cardStyle` style object inside render method of `Card` component and assign to `Card` component
+```
+```
+
+#### Square Component
+- Similar to Card component with a smaller height
+- Create `squareStyle` style object and assign to `Square` component
+- Compose: Add `Square` component inside the `Card` component
+
+Square component:
+```
+var Square = React.createClass({
+ render: function() {
+   var squareStyle = {
+     height: 150,
+     backgroundColor: "#FF6663"
+   }
+   return (
+     <div style={squareStyle}>
+     </div>
+```
+
+```
+/* Inside Card component */
+var Card = React.createClass({
+  render: function() {
+    ...
+    return (
+      <div style={cardStyle}>
+        <Square/>
+      </div>
+    );
+
+
+ReactDOM.render(
+    <div>
+      <Card/>
+    </div>,
+    document.querySelector('#container')
+  );
+```
+
+#### Label Component
+- Create `labelStyle` style object and assign to `Label` component
+- Compose: Add `Label` component inside the `Card` component
+
+Label component:
+```
+return (
+ <p style={labelStyle}>#FF6663</p>
+);
+```
+
+Card component:
+```
+var Card = React.createClass({
+  render: function() {
+    ...
+    return (
+      <div style={cardStyle}>
+        <Square/>
+        <Label/>
+      </div>
+    );
+```
+
+### Passing Properties
+- Remove the hard-color color value in `Square` and `Label` components
+- In this example, we pass the color property from Parent `<Card>` component to its descendants through property chain
+- Can be difficult if there are multiple properties to be passed across multilevels
+
+1. Card component: Pass properties
+```
+var Card = React.createClass({
+ render: function() {
+   ...
+   return (
+     <div style={cardStyle}>
+       <Square color={this.props.color}/>
+       <Label color={this.props.color}/>
+     </div>
+   );
+ }
+});
+
+ReactDOM.render(
+  <div>
+    <Card color="#FF6663"/>
+  </div>,
+  document.querySelector('#container')
+);
+```
+
+2. Square component:
+```
+var Square = React.createClass({
+   render: function() {
+     var squareStyle = {
+       height: 150,
+       backgroundColor: this.props.color
+     }
+    ...
+   }
+ });
+```
+
+3. Label component:
+```
+var Label = React.createClass({
+ render: function() {
+   ...
+   return (
+     <p style={labelStyle}>{this.props.color}</p>
+   );
+ }
+});
+```
 ------------------------------------
 
 # Transferring Properties (Props)
