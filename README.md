@@ -193,7 +193,7 @@ var Buttonify = React.createClass({
 });
 ```
 
-Calling Compnent:
+Calling Component:
 ```
 ReactDOM.render(
   <div>
@@ -254,6 +254,48 @@ CSS:
 2. Assign the style object to JSX component
 
 #### Creating a Style Object
+- Define an object with all CSS properties
+- Style object should be defined **inside** the component's `render` method
+- The CSS properties inside of style object can take customizable values
+- Values inside style object must be enclosed in quotes `"` or remove `px` for numbers. Eg: 32px --> 32 to avoid quotes
+- WARNING: Single word CSS properties are unchanged. Multi-word CSS are turned into camelCase with dash removed. Eg: `background-color` --> `backgroundColor`
+```
+var Letter = React.createClass({
+     render: function() {
+         var letterStyle = {
+           padding: 10,
+           margin: 10,
+           backgroundColor: "#ffde00",
+           color: "#333",
+          ...
+         }
+```
+
+#### Assigning style object to JSX UI component
+- Use `style` attribute instead of `className`
+- Set the `style` attribute with style object surrounded by parenthesis `{ }`
+```
+<div style={letterStyle}>
+ {this.props.children}
+</div>
+```
+
+#### Making the background color customizable
+- We can make style values easily customizable through the parent (aka the consumer of the component)
+
+Style object:
+```
+var letterStyle = {
+ ...
+ backgroundColor: this.props.bgcolor,
+ ...
+}
+```
+
+Component (Parent aka consumer):
+```
+<Letter bgcolor="#58B3FF">A</Letter>
+```
 
 ------------------------------------
 
