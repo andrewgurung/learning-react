@@ -636,6 +636,7 @@ componentDidMount: function() {
 ### Setting State
 - Use `setState` API to update the state of `strikes` property
 - IMPORTANT: Calling `setState` will update the `state` object and automatically calls `render` method to display the updated `strikes` value
+- React is great in syncing data and UI for us
 ```
 timerTick: function() {
   this.setState({
@@ -644,11 +645,10 @@ timerTick: function() {
 }
 ```
 
-
 ------------------------------------
 
 # Going from Data to UI
-
+- 
 ------------------------------------
 
 # Working with Events
