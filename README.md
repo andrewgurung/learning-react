@@ -90,13 +90,36 @@ js"></script>
 
 ### Display Name
 - ReactDOM.render(displayBody, element)
-- displayBody: HTML body that you want to render
+- displayBody: HTML-like elements (aka JSX) that you want to output
 - element: Where to render?
 - Babel compilation: Add `type="text/babel"` attribute to script tag for Babel to do its magic
 - Run your first React App
 
+### Changing the Destination
+- Move render element from `body` to `div`
+```
+<div id="container"></div>
+<script type="text/babel">
+  var destination = document.querySelector("#container");
+  ReactDOM.render(
+  <h1>Andrew Gurung</h1>,
+  destination);
+</script>
+```
 
+### Style up
+- Add style using CSS
+```
+#container {
+  background-color: #EEE;
+}
 
+#container h1{
+  font-size: 48px;
+  font-family: sans-serif;
+  color: #0080A8;
+}
+```
 ------------------------------------
 
 # Components in React
