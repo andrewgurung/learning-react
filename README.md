@@ -600,6 +600,50 @@ ReactDOM.render(
 ------------------------------------
 
 # Dealing with State
+[Codepen.io Link](https://codepen.io/andrewgurung/pen/ZJEQXN)
+- State is a way to store data on a component that goes beyond properties
+- We are taking an example of a Lightning strike counter that calls `timerTick` function which adds 100 to the initial count. setInterval is used to trigger the `timerTick` function every 1000ms or 1sec
+
+### React Component exposes three APIs
+1. getInitialState: This method runs `before` component gets mounted
+2. componentDidMount: This method runs `after` component gets rendered
+3. setState: This method allows to update the value of `state` object
+
+### Setting the Initial State Value
+- Set `strikes` as our counter with value of 0 in `LightningCounter` component using `getInitialState` function
+- The object that is returned is the initial value of our component's `state` object
+- Render the counter value using `{this.state.strikes}`
+- At this point, the UI will display `0`
+```
+var LightningCounter = React.createClass({
+    getInitialState: function() {
+      return {
+        strikes: 0
+      };
+    }
+    ...
+```
+
+### Starting our Timer
+- After the component has been rendered, start increasing the `strikes` counter by 100 every second using `componentDidMount` function
+- `setInterval` function will trigger at a fixed interval
+```
+componentDidMount: function() {
+  setInterval(this.timerTick, 1000);
+}
+```
+
+### Setting State
+- Use `setState` API to update the state of `strikes` property
+- IMPORTANT: Calling `setState` will update the `state` object and automatically calls `render` method to display the updated `strikes` value
+```
+timerTick: function() {
+  this.setState({
+    strikes: this.state.strikes + 100
+  });
+}
+```
+
 
 ------------------------------------
 
