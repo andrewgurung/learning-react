@@ -524,7 +524,79 @@ var Shirt = React.createClass({
 ------------------------------------
 
 # Meet JSX
+- JSX is converted into JavaScript by Babel for the browser
 
+JSX:
+```
+<div style={cardStyle}>
+  <Square color={this.props.color}>
+</div>
+```
+
+Babel conversion of JSX to JavaScript:
+```
+var Card = React.createClass({
+  displayName: "Card",
+  render: function render() {
+    var cardStyle = {
+      height: 200,
+      width: 150,
+      padding: 0,
+      backgroundColor: “#FFF”,
+      WebkitFilter: "drop-shadow(0px 0px 5px #666)",
+      filter: "drop-shadow(0px 0px 5px #666)""
+    };
+    return React.createElement(
+      "div",
+      { style: cardStyle },
+      React.createElement(Square, { color: this.props.color }),
+      React.createElement(Label, { color: this.props.color })
+    );
+  }
+});
+```
+
+## JSX Quirks
+1. Can only return a single root Node
+2. Cannot specify CSS inline
+  - The following snippet is not allowed where CSS is defined inside styled. Instead CSS has to be defined using style object
+  ```
+  /* NOT ALLOWED */
+  <div style=”font-family:Arial;font-size:24px“>
+    <p>Blah!</p>
+  </div>
+  ```
+3. Javascript reserved Keywords and className cannot be used
+4. Comments: JSX comments are quite similar to HTML and JS except for comments as a child of tag. Such comments needs to be wrapped by `{` and `}`
+  - Child Comments: Comment is a Child of <div>
+    ```
+    <div class=“slideIn”>
+      <p class=“emphasis”>Gabagool!</p>
+      {/* I am a child comment */}
+      <Label/>
+    </div>,
+    ```
+  - Tag comment: Wholly inside a tag
+    ```
+    <Label
+      /* This comment
+      goes across
+      multiple lines */
+      className=“colorCard” // end of line
+    />
+    ```
+5. Capitalization, HTML Elements and Components: HTML elements should be lowercase, whereas Components must be capitalized
+6. JSX Can Be Anywhere: JSX can be defined outside of render function
+```
+var swatchComponent = <Swatch color=“#2F004F”></Swatch>;
+
+ReactDOM.render(
+  <div>
+    {swatchComponent}
+  </div>,
+  document.querySelector(“#container”)
+);
+```
 ------------------------------------
 
 # Dealing with State
