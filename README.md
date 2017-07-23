@@ -496,8 +496,31 @@ ReactDOM.render(
 - In JavaScript, spread operator is represented by `...` before our array
 - Eg: `...items` which represents items[0], items[1], items[2] etc
 - Spread operator allows us to unwrap an element into its individual elements
+- Using `spread` operator if there is any change in a property, only two places needs change -- where property is defined and where it is consumed
+- `spread` operator only works with arrays out of the box. The reason it works with React object literal `props` is because of Babel transpilation
 
+Apply `spread` operator to Label and Shirt components:
+```  
+var Label = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <Display {...this.props}/>
+      </div>
+    );
+  }
+});
 
+var Shirt = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <Label {...this.props}/>
+      </div>
+    );
+  }
+});
+```
 ------------------------------------
 
 # Meet JSX
