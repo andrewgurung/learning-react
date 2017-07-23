@@ -434,6 +434,69 @@ var Label = React.createClass({
 ------------------------------------
 
 # Transferring Properties (Props)
+- Passing property across multiple layers of components is complicated
+- React enforces a chain of command where properties have to flow from parent to immediate child
+- IMPORTANT: Communication is `one-way` from parent to child
+- Renaming or removing a property in one component will effect everyone in the chain
+
+### Detailed Look at the Problem
+[Codepen.io Link](https://codepen.io/andrewgurung/pen/zdYOmE)
+- Shirt --> Label --> Display
+- The properties travels all the way from `Shirt` to `Display` component through `props` object
+```
+var Display = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <p>{this.props.color}</p>
+        <p>{this.props.num}</p>
+        <p>{this.props.size}</p>
+      </div>
+    );
+  }
+});
+
+var Label = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <Display
+          color={this.props.color}
+          num={this.props.num}
+          size={this.props.size}
+        />
+      </div>
+    );
+  }
+});
+
+var Shirt = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <Label
+          color={this.props.color}
+          num={this.props.num}
+          size={this.props.size}
+        />
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <div>
+    <Shirt color="steelblue" num="3.14" size="medium"/>
+  </div>,
+  document.querySelector('#container')
+);
+```
+
+### Better solution using the Spread Operator
+- In JavaScript, spread operator is represented by `...` before our array
+- Eg: `...items` which represents items[0], items[1], items[2] etc
+- Spread operator allows us to unwrap an element into its individual elements
+
 
 ------------------------------------
 
