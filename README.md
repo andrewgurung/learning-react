@@ -123,7 +123,85 @@ js"></script>
 ------------------------------------
 
 # Components in React
+[Codepen.io Link](https://codepen.io/andrewgurung/pen/JyPxyO)
+- React components are resuable chunks of Javascript that output HTML elements
+- `function` helps to structure our app and reuse code
+- Component is like `function` for the UI
+- Note: JSX cannot have multiple adjacent elements so it must be wrapped by a single element. Eg: Wrap with `div`
 
+### First React Component
+[Codepen.io Link](https://codepen.io/andrewgurung/pen/JyPxyO)
+- Components can be created using `React.createClass`
+- Eg: `var HelloWorld = React.createClass({ ... })` where HelloWorld is a Component
+- Every React Component requires a `render` property
+
+Component:
+```
+var HelloWorld = React.createClass({
+  render: function() {
+    return (
+      <p>Hello, componentized world!</p>
+    )
+  }
+});
+```
+
+Using component:
+```
+ReactDOM.render(
+  <HelloWorld/>,
+  document.querySelector('#container')
+);
+```
+
+### Passing argument to React Component
+[Codepen.io Link](https://codepen.io/andrewgurung/pen/jLNdxW)
+1. Updating Component Definition
+- Use `this.props`
+```
+render: function() {
+  return (
+    <p>Hello, {this.props.greetTarget}!</p>
+  )
+}
+```
+
+2. Modifying component call
+- Wrap in `div` and pass argument through JSX attributes
+```
+<div>
+  <HelloWorld greetTarget="Batman"/>
+  <HelloWorld greetTarget="Iron Man"/>
+  <HelloWorld greetTarget="Jon Snow"/>
+</div>
+```
+
+### Dealing with Children
+[Codepen.io Link](https://codepen.io/andrewgurung/pen/jLNdpq)
+- Parent element have the capability to access its children property
+- Syntax: `this.props.children`
+Component:
+```
+var Buttonify = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <button type={this.props.behavior}>{this.props.children}</button>
+      </div>
+    )
+  }
+});
+```
+
+Calling Compnent:
+```
+ReactDOM.render(
+  <div>
+    <Buttonify behavior="Submit">Send Data</Buttonify>
+  </div>,
+  document.querySelector('#container')
+);
+```
 ------------------------------------
 
 # Styling in React
