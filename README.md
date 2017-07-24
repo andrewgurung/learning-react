@@ -648,7 +648,50 @@ timerTick: function() {
 ------------------------------------
 
 # Going from Data to UI
-- 
+[Codepen.io Link](https://codepen.io/andrewgurung/pen/LjYNLe)
+- Most of the time, you need to deal with data in the form of JSON objects, arrays etc that are different from the UI
+
+- In the following example, Circle component is declared inside of render method which can be limiting -- if you are an outside data affect our Circle component
+```
+ReactDOM.render(
+   <Circle bgColor="#F9C240"/>,
+   document.querySelector("#container")
+);
+```
+
+### JSX can be Anywhere
+- JSX can live outside of render method assigned to a variable
+- Moving `Circle` component outside of `render` method gives tons of options
+- The Circle component can be generated/returned from a function that gives random `bgColor`
+```
+var theCircle = <Circle bgColor="#F9C240"/>;
+
+ReactDOM.render(
+  <div>
+    {theCircle}
+  </div>
+  destination
+);
+```
+
+### Dealing with Arrays in Context of JSX
+- Use `key` prop for React to uniquely identify each particular component
+```
+var colors = ["#393E41", "#E94F37", "#1C89BF", "#A1D363","#85FFC7", "#297373", "#FF8552", "#A40E4C"];
+var renderData = [];
+for(var i=0; i < colors.length; i++) {
+ var color = colors[i];
+ renderData.push(<Circle key={i + color} bgColor={color}/>);
+}
+var destination = document.querySelector("#container");
+
+ReactDOM.render(
+ <div>
+   {renderData}
+ </div>,
+ destination
+);
+```
 ------------------------------------
 
 # Working with Events
